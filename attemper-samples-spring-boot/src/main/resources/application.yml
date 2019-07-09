@@ -1,0 +1,30 @@
+# Tomcat
+server:
+    tomcat:
+        uri-encoding: UTF-8
+        max-threads: 1000
+        min-spare-threads: 30
+    port: 5213
+    connection-timeout: 5s
+    servlet:
+      context-path: /${spring.application.name}
+
+spring:
+    application: 
+        name: attemper-interior
+    profiles:
+        active: dev
+
+# eureka
+eureka:
+  instance:
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application_instance_id:${random.value}}
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    region: default
+    availabilityZones:
+      default: defaultZone
+    preferSameZone: false
