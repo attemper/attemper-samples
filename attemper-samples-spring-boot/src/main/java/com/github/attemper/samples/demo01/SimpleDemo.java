@@ -5,6 +5,7 @@ import com.github.attemper.java.sdk.common.executor.param.execution.TaskParam;
 import com.github.attemper.java.sdk.common.result.execution.LogResult;
 import com.github.attemper.java.sdk.common.result.execution.TaskResult;
 import com.github.attemper.java.sdk.micro.executor.client.ExecutorMicroClient;
+import com.github.attemper.samples.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service("simpleDemo")
-public class SimpleDemo {
+@Service
+public class SimpleDemo extends CommonService {
 
     @Autowired
     private ExecutorMicroClient executorMicroClient;
@@ -23,23 +24,16 @@ public class SimpleDemo {
      *
      * @param taskParam
      */
-    public LogResult step1(TaskParam<Demo01Step1Param> taskParam) {
-        System.out.println("step1's bizParam:\n" + taskParam.getBizParam());
-        int sleeping = (int) Math.random() * 5000;
-        try {
-            Thread.sleep(sleeping);
-        } catch (InterruptedException e) {
-            return new TaskResult()
-                    .setSuccess(false)
-                    .setLogKey(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                    .setLogText(e.getMessage());
-        }
-        Map<String, Object> transmittedMap = new HashMap<>();
-        transmittedMap.put("currentStep", "step1");
-        transmittedMap.put("completed", true);
-        Map<String, String> dataMap = new HashMap<>();
-        dataMap.put("step1_sleeping", String.valueOf(sleeping));
-        return new TaskResult().setParamMap(transmittedMap).setDataMap(dataMap);
+    public LogResult step1(TaskParam<Demo01Step1Param> taskParam) throws Exception {
+        log.debug("step1's bizParam:\n" + taskParam.getBizParam());
+        int sleeping = (int) (Math.random() * 5);
+        Thread.sleep(sleeping * 1000);
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("currentStep", "step1");
+        paramMap.put("completed", true);
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("step1_sleeping", sleeping);
+        return new TaskResult().setParamMap(paramMap).setDataMap(dataMap);
     }
 
     /**
@@ -49,11 +43,11 @@ public class SimpleDemo {
      */
     public LogResult step2(TaskParam<Demo01Step2Param> taskParam) {
         new Thread(() -> {
-            System.out.println("step2 new thread");
-            System.out.println("step2's bizParam:\n" + taskParam.getBizParam());
-            int sleeping = (int) Math.random() * 50000;
+            log.debug("step2 new thread");
+            log.debug("step2's bizParam:\n" + taskParam.getBizParam());
+            int sleeping = (int) (Math.random() * 5);
             try {
-                Thread.sleep(sleeping);
+                Thread.sleep(sleeping * 1000);
             } catch (InterruptedException e) {
                 executorMicroClient.signal(
                         new EndParam()
@@ -63,14 +57,14 @@ public class SimpleDemo {
                                         .setLogKey(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
                                         .setLogText(e.getMessage())));
             }
-            Map<String, String> dataMap = new HashMap<>();
-            dataMap.put("step2_sleeping", String.valueOf(sleeping));
+            Map<String, Object> dataMap = new HashMap<>();
+            dataMap.put("step2_sleeping", sleeping);
             executorMicroClient.signal(
                     new EndParam()
                             .setBaseExecutionParam(taskParam.getMetaParam())
                             .setTaskResult(new TaskResult().setDataMap(dataMap)));
         }).start();
-        System.out.println("step2 main thread");
+        log.debug("step2 main thread");
         return new LogResult();
     }
 }

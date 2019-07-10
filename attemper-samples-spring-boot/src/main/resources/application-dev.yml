@@ -9,3 +9,7 @@ dispatch:
   password: LR6sWNFAPIfZgYIUX+u9fY4qsNlQR0H4QqPEuyLRBm8=
   executor:
     service-name: attemper-executor
+
+logging:
+  level:
+    com.github.attemper.samples: debug
