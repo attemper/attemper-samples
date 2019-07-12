@@ -1,6 +1,5 @@
 package com.github.attemper.samples.demo03;
 
-import com.github.attemper.java.sdk.common.executor.param.execution.EndParam;
 import com.github.attemper.java.sdk.common.executor.param.execution.TaskParam;
 import com.github.attemper.java.sdk.common.result.execution.LogResult;
 import com.github.attemper.java.sdk.common.result.execution.TaskResult;
@@ -22,8 +21,7 @@ public class ParallelDemo extends CommonService {
      */
     public LogResult step1(TaskParam<Void> taskParam) throws Exception {
         log.debug("step1 start");
-        int sleeping = (int) (Math.random() * 2);
-        Thread.sleep(sleeping * 1000);
+        Thread.sleep(2000);
         log.debug("step1 end");
         return new TaskResult();
 
@@ -46,20 +44,10 @@ public class ParallelDemo extends CommonService {
      *
      * @param taskParam
      */
-    public LogResult step22(TaskParam<Void> taskParam) {
+    public LogResult step22(TaskParam<Void> taskParam) throws Exception {
         log.debug("step22 start");
-        new Thread(() -> {
-            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-                log.error(e.getMessage(), e);
-            }
-            executorMicroClient.signal(
-                    new EndParam()
-                            .setBaseExecutionParam(taskParam.getMetaParam())
-                            .setTaskResult(new TaskResult()));
-            log.debug("step22 end");
-        }).start();
+        Thread.sleep(4000);
+        log.debug("step22 end");
         return new LogResult();
     }
 
@@ -82,8 +70,7 @@ public class ParallelDemo extends CommonService {
      */
     public LogResult step3(TaskParam<Void> taskParam) throws Exception {
         log.debug("step3 start");
-        int sleeping = (int) (Math.random() * 2);
-        Thread.sleep(sleeping * 1000);
+        Thread.sleep(3000);
         log.debug("step3 end");
         return new TaskResult();
     }
