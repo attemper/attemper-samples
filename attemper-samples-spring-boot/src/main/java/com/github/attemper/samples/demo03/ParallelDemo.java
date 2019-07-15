@@ -1,5 +1,6 @@
 package com.github.attemper.samples.demo03;
 
+import com.github.attemper.java.sdk.common.executor.param.execution.EndParam;
 import com.github.attemper.java.sdk.common.executor.param.execution.TaskParam;
 import com.github.attemper.java.sdk.common.result.execution.LogResult;
 import com.github.attemper.java.sdk.common.result.execution.TaskResult;
@@ -40,14 +41,24 @@ public class ParallelDemo extends CommonService {
     }
 
     /**
-     * sync
+     * async
      *
      * @param taskParam
      */
     public LogResult step22(TaskParam<Void> taskParam) throws Exception {
-        log.debug("step22 start");
-        Thread.sleep(4000);
-        log.debug("step22 end");
+        new Thread(() -> {
+            log.debug("step22 start");
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                log.error(e.getMessage(), e);
+            }
+            executorMicroClient.signal(
+                    new EndParam()
+                            .setBaseExecutionParam(taskParam.getMetaParam())
+                            .setTaskResult(new TaskResult()));
+            log.debug("step22 end");
+        }).start();
         return new LogResult();
     }
 
