@@ -7,7 +7,6 @@ import com.github.attemper.java.sdk.common.result.execution.TaskResult;
 import com.github.attemper.java.sdk.micro.executor.client.ExecutorMicroClient;
 import com.github.attemper.samples.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -41,7 +40,7 @@ public class SimpleDemo extends CommonService {
      *
      * @param taskParam
      */
-    public LogResult step2(TaskParam<Demo01Step2Param> taskParam) {
+    public void step2(TaskParam<Demo01Step2Param> taskParam) {
         new Thread(() -> {
             log.debug("step2 new thread");
             log.debug("step2's bizParam:\n" + taskParam.getBizParam());
@@ -54,7 +53,6 @@ public class SimpleDemo extends CommonService {
                                 .setBaseExecutionParam(taskParam.getMetaParam())
                                 .setTaskResult((TaskResult) new TaskResult()
                                         .setSuccess(false)
-                                        .setLogKey(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
                                         .setLogText(e.getMessage())));
             }
             Map<String, Object> dataMap = new HashMap<>();
@@ -65,6 +63,5 @@ public class SimpleDemo extends CommonService {
                             .setTaskResult(new TaskResult().setDataMap(dataMap)));
         }).start();
         log.debug("step2 main thread");
-        return new LogResult();
     }
 }

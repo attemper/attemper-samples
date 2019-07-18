@@ -23,7 +23,7 @@ public class ExclusiveDemo extends CommonService {
      *
      * @param taskParam
      */
-    public LogResult step1(TaskParam<Void> taskParam) {
+    public void step1(TaskParam<Void> taskParam) {
         new Thread(() -> {
             log.debug("step1 new thread");
             int sleeping = (int) (Math.random() * 5);
@@ -40,7 +40,6 @@ public class ExclusiveDemo extends CommonService {
                             .setTaskResult(new TaskResult().setParamMap(paramMap)));
         }).start();
         System.out.println("step1 main thread");
-        return new LogResult();
 
     }
 

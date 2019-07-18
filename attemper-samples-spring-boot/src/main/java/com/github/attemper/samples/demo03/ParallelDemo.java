@@ -45,7 +45,7 @@ public class ParallelDemo extends CommonService {
      *
      * @param taskParam
      */
-    public LogResult step22(TaskParam<Void> taskParam) throws Exception {
+    public void step22(TaskParam<Void> taskParam) throws Exception {
         new Thread(() -> {
             log.debug("step22 start");
             try {
@@ -59,7 +59,6 @@ public class ParallelDemo extends CommonService {
                             .setTaskResult(new TaskResult()));
             log.debug("step22 end");
         }).start();
-        return new LogResult();
     }
 
     /**
