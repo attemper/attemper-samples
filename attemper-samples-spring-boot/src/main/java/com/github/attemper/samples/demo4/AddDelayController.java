@@ -18,7 +18,8 @@ public class AddDelayController {
     @PostMapping("/delay/add")
     public void add(@RequestBody Map<String, Object> map) {
         Date now = new Date();
-        delayJobService.add("delayDemo", new Date(now.getTime() + 10 * 1000));
+        Date startTime = new Date(now.getTime() + 10 * 1000);
+        delayJobService.startThenEnd("delayDemo", startTime);
     }
 
 }

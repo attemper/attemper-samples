@@ -4,7 +4,9 @@ import com.github.attemper.java.sdk.common.executor.param.execution.TaskParam;
 import com.github.attemper.java.sdk.common.result.execution.LogResult;
 import com.github.attemper.java.sdk.common.result.execution.TaskResult;
 import com.github.attemper.samples.CommonService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DelayDemo extends CommonService {
 
     /**
