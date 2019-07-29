@@ -18,6 +18,11 @@
             <version>${sdk.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.github.attemper</groupId>
+            <artifactId>attemper-java-sdk-micro-web</artifactId>
+            <version>${sdk.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>

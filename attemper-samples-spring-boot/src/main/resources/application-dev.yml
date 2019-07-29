@@ -9,6 +9,8 @@ dispatch:
   password: LR6sWNFAPIfZgYIUX+u9fY4qsNlQR0H4QqPEuyLRBm8=
   executor:
     service-name: attemper-executor
+  web:
+    service-name: attemper-web
 
 logging:
   level:
