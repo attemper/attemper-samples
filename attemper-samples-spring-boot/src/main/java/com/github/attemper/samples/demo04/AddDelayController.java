@@ -1,4 +1,4 @@
-package com.github.attemper.samples.demo4;
+package com.github.attemper.samples.demo04;
 
 import com.github.attemper.java.sdk.rest.web.service.DelayJobService;
 import org.springframework.beans.factory.annotation.Autowired;
