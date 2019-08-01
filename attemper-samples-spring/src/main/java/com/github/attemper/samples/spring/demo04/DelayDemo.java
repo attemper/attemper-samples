@@ -1,9 +1,9 @@
-package com.github.attemper.samples.demo04;
+package com.github.attemper.samples.spring.demo04;
 
 import com.github.attemper.java.sdk.common.executor.param.execution.TaskParam;
 import com.github.attemper.java.sdk.common.result.execution.LogResult;
 import com.github.attemper.java.sdk.common.result.execution.TaskResult;
-import com.github.attemper.samples.CommonService;
+import com.github.attemper.samples.spring.CommonService;
 import org.springframework.stereotype.Service;
 
 @Service

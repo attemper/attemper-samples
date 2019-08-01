@@ -1,4 +1,4 @@
-package com.github.attemper.samples.demo04;
+package com.github.attemper.samples.spring.demo04;
 
 import com.github.attemper.java.sdk.common.result.BaseResult;
 import com.github.attemper.java.sdk.common.web.result.delay.DelayJobResult;
