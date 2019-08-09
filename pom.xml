@@ -8,7 +8,7 @@
 	<modules>
 		<module>attemper-samples-spring-boot</module>
 		<module>attemper-samples-spring</module>
-		<module>attemper-samples-jar</module>
+        <module>attemper-samples-jar</module>
 	</modules>
 	<packaging>pom</packaging>
 
