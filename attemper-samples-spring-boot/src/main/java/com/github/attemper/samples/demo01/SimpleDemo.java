@@ -30,9 +30,8 @@ public class SimpleDemo extends CommonService {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("currentStep", "step1");
         paramMap.put("completed", true);
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("step1_sleeping", sleeping);
-        return new TaskResult().setParamMap(paramMap).setDataMap(dataMap);
+        paramMap.put("step1_sleeping", sleeping);
+        return new TaskResult().setParamMap(paramMap);
     }
 
     /**
@@ -55,12 +54,12 @@ public class SimpleDemo extends CommonService {
                                         .setSuccess(false)
                                         .setLogText(e.getMessage())));
             }
-            Map<String, Object> dataMap = new HashMap<>();
-            dataMap.put("step2_sleeping", sleeping);
+            Map<String, Object> paramMap = new HashMap<>();
+            paramMap.put("step2_sleeping", sleeping);
             executorMicroClient.signal(
                     new EndParam()
                             .setBaseExecutionParam(taskParam.getMetaParam())
-                            .setTaskResult(new TaskResult().setDataMap(dataMap)));
+                            .setTaskResult(new TaskResult().setParamMap(paramMap)));
         }).start();
         log.debug("step2 main thread");
     }
