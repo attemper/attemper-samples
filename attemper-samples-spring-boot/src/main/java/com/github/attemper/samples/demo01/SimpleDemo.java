@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * bean=simpleDemo
+ */
 @Service
 public class SimpleDemo extends CommonService {
 
@@ -19,7 +22,7 @@ public class SimpleDemo extends CommonService {
     private ExecutorMicroClient executorMicroClient;
 
     /**
-     * sync
+     * method=step1
      *
      * @param taskParam
      */
@@ -35,7 +38,7 @@ public class SimpleDemo extends CommonService {
     }
 
     /**
-     * async
+     * method=step2
      *
      * @param taskParam
      */

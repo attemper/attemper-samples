@@ -9,6 +9,9 @@ import com.github.attemper.samples.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * bean=parallelDemo
+ */
 @Service
 public class ParallelDemo extends CommonService {
 
@@ -16,7 +19,7 @@ public class ParallelDemo extends CommonService {
     private ExecutorMicroClient executorMicroClient;
 
     /**
-     * sync
+     * method=step1
      *
      * @param taskParam
      */
@@ -29,7 +32,7 @@ public class ParallelDemo extends CommonService {
     }
 
     /**
-     * sync
+     * method=step21
      *
      * @param taskParam
      */
@@ -41,7 +44,7 @@ public class ParallelDemo extends CommonService {
     }
 
     /**
-     * async
+     * method=step22
      *
      * @param taskParam
      */
@@ -62,7 +65,7 @@ public class ParallelDemo extends CommonService {
     }
 
     /**
-     * sync
+     * method=step23
      *
      * @param taskParam
      */
@@ -74,7 +77,7 @@ public class ParallelDemo extends CommonService {
     }
 
     /**
-     * sync
+     * method=step3
      *
      * @param taskParam
      */

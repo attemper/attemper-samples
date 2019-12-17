@@ -23,7 +23,7 @@
 		<spring.boot.version>2.1.5.RELEASE</spring.boot.version>
 		<spring.cloud.version>Greenwich.SR1</spring.cloud.version>
 
-		<sdk.version>1.0.0-SNAPSHOT</sdk.version>
+		<sdk.version>0.9.5</sdk.version>
 
 		<groovy.version>2.4.15</groovy.version>
 

@@ -6,11 +6,14 @@ import com.github.attemper.java.sdk.common.result.execution.TaskResult;
 import com.github.attemper.samples.CommonService;
 import org.springframework.stereotype.Service;
 
+/**
+ * bean=delayDemo
+ */
 @Service
 public class DelayDemo extends CommonService {
 
     /**
-     * sync
+     * method=step1
      *
      * @param taskParam
      */

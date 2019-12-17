@@ -4,6 +4,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
 
+# 以下配置仅在调度中心异步Http调用时才需要
 dispatch:
   user-name: interior
   password: LR6sWNFAPIfZgYIUX+u9fY4qsNlQR0H4QqPEuyLRBm8=

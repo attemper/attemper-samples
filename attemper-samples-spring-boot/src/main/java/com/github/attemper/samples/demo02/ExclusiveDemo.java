@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * bean=exclusiveDemo
+ */
 @Service
 public class ExclusiveDemo extends CommonService {
 
@@ -19,7 +22,7 @@ public class ExclusiveDemo extends CommonService {
     private ExecutorMicroClient executorMicroClient;
 
     /**
-     * async
+     * method=step1
      *
      * @param taskParam
      */
@@ -44,7 +47,7 @@ public class ExclusiveDemo extends CommonService {
     }
 
     /**
-     * sync
+     * method=step2
      *
      * @param taskParam
      */
