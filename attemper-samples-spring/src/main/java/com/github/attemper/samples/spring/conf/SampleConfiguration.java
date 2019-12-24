@@ -3,9 +3,11 @@ package com.github.attemper.samples.spring.conf;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.attemper.java.sdk.common.param.sys.login.LoginParam;
 import com.github.attemper.java.sdk.rest.conf.RestConfiguration;
+import com.github.attemper.java.sdk.rest.executor.client.ExecutorRestClient;
 import com.github.attemper.java.sdk.rest.executor.conf.RestExecutorConfiguration;
 import com.github.attemper.java.sdk.rest.web.client.WebRestClient;
 import com.github.attemper.java.sdk.rest.web.service.DelayJobService;
+import com.github.attemper.samples.task.TaskConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,7 @@ import java.util.Arrays;
 
 @Configuration
 @Import({
+        TaskConfiguration.class,
         RestConfiguration.class,
         RestExecutorConfiguration.class
 })
@@ -32,6 +35,11 @@ public class SampleConfiguration {
     @Bean
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
+    }
+
+    @Bean
+    public ExecutorRestClient executorRestClient() {
+        return new ExecutorRestClient();
     }
 
     @Bean

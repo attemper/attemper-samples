@@ -1,13 +1,9 @@
 server:
-    port: 5213
-    servlet:
-      context-path: /${spring.application.name}
+    port: 8080
 
 spring:
     application: 
-        name: attemper-interior
-    profiles:
-        active: dev
+        name: attemper-samples
 
 # eureka
 eureka:
@@ -22,3 +18,18 @@ eureka:
     availabilityZones:
       default: defaultZone
     preferSameZone: false
+    enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+logging:
+  level:
+    com.github.attemper.samples: debug
+
+dispatch:
+  user-name: sample
+  password: 7ZXF+IWQUpHhG93taoynzM6izTDS8Rc1zm2JwaMeM9E=
+  executor:
+    service-name: attemper-executor
+  web:
+    service-name: attemper-web
