@@ -14,9 +14,9 @@ public class ExclusiveTask {
 
     /**
      * 返回随机数randomValue
-     * randomValue>0.5 执行node2，randomValue<=0.5执行node3
-     * @return
-     * @throws InterruptedException
+     * randomValue大于0.5 执行node2，randomValue小于等于0.5执行node3
+     * @return ...
+     * @throws InterruptedException ...
      */
     public LogResult node1() throws InterruptedException {
         log.debug("node1 start");

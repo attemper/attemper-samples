@@ -24,13 +24,38 @@
 		<spring.cloud.version>Greenwich.SR4</spring.cloud.version>
 
 		<sdk.version>1.0.0</sdk.version>
-
-		<maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
-		<maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
+		<commons.logging.version>1.2</commons.logging.version>
+		<commons.codec.version>1.13</commons.codec.version>
 		<lombok.maven.plugin.version>1.16.18.0</lombok.maven.plugin.version>
 		<!-- docker -->
 		<dockerfile.maven.plugin.version>1.4.13</dockerfile.maven.plugin.version>
+		<dockerfile.organization>attemper</dockerfile.organization>
+
+		<maven.compiler.plugin.version>2.1</maven.compiler.plugin.version>
+		<maven.source.plugin.version>2.1.1</maven.source.plugin.version>
+		<maven.javadoc.plugin.version>2.10.3</maven.javadoc.plugin.version>
+		<maven.release.plugin.version>2.5.3</maven.release.plugin.version>
+		<maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
 	</properties>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
@@ -56,70 +81,83 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>${maven.deploy.plugin.version}</version>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven.source.plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>${maven.jar.plugin.version}</version>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven.javadoc.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<aggregate>true</aggregate>
+					<charset>${project.build.sourceEncoding}</charset>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<docencoding>${project.build.sourceEncoding}</docencoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>${maven.release.plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>${maven.gpg.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok-maven-plugin</artifactId>
+				<version>${lombok.maven.plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>delombok</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
 
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
-	<description>Samples of attemper</description>
-	<url>https://github.com/attemper/${project.artifactId}</url>
-	<organization>
-		<name>Shanghai Stock Exchange</name>
-		<url>http://www.sse.com.cn</url>
-	</organization>
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-	<scm>
-		<connection>scm:git:git@github.com:attemper/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:git@github.com:attemper/${project.artifactId}.git</developerConnection>
-		<tag/>
-		<url>https://github.com/attemper/${project.artifactId}</url>
-	</scm>
-	<issueManagement>
-		<system>Issue</system>
-		<url>https://github.com/attemper/${project.artifactId}/issues</url>
-	</issueManagement>
-	<developers>
-		<developer>
-			<id>ldang264</id>
-			<name>Dang Ling</name>
-			<email>ldang@sse.com.cn</email>
-			<organization>Shanghai Stock Exchange</organization>
-			<organizationUrl>http://www.sse.com.cn</organizationUrl>
-			<roles>
-				<role>Primary Developer</role>
-			</roles>
-			<timezone>-6</timezone>
-		</developer>
-	</developers>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Sonatype Nexus Snapshots</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</snapshotRepository>
-		<repository>
-			<id>sonatype-nexus-staging</id>
-			<name>Nexus Release Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
 </project>
