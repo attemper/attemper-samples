@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.attemper</groupId>
 	<artifactId>attemper-samples</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<modules>
 		<module>attemper-samples-spring-boot</module>
 		<module>attemper-samples-spring</module>
@@ -32,8 +32,8 @@
 		<dockerfile.organization>attemper</dockerfile.organization>
 
 		<maven.compiler.plugin.version>2.1</maven.compiler.plugin.version>
-		<maven.source.plugin.version>2.1.1</maven.source.plugin.version>
 		<maven.release.plugin.version>2.5.3</maven.release.plugin.version>
+		<maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
 	</properties>
 
 	<parent>
@@ -86,17 +86,6 @@
 					<target>${java.version}</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>${maven.source.plugin.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-deploy-plugin</artifactId>
